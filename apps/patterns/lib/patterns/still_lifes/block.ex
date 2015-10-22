@@ -1,4 +1,6 @@
 defmodule Patterns.StillLifes.Block do
+  use Patterns
+
   def to_list do
     [
       0, 0, 0, 0,

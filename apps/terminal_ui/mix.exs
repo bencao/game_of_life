@@ -1,4 +1,4 @@
-defmodule TerminalUi.Mixfile do
+defmodule TerminalUI.Mixfile do
   use Mix.Project
 
   def project do
@@ -33,6 +33,9 @@ defmodule TerminalUi.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      { :engine, in_umbrella: true },
+      { :encurses, github: "jzellner/encurses" }
+    ]
   end
 end

@@ -1,8 +1,12 @@
 defmodule Patterns do
-  @doc """
-  Load specific `pattern` into engine
-  """
-  def load(pattern) do
-    Engine.API.load(pattern.to_list)
+  defmacro __using__(opts \\ %{}) do
+    quote do
+      @doc """
+      Load current pattern into engine
+      """
+      def load do
+        Engine.API.load to_list
+      end
+    end
   end
 end

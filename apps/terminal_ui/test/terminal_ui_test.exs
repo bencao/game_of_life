@@ -1,4 +1,4 @@
-defmodule TerminalUiTest do
+defmodule TerminalUITest do
   use ExUnit.Case
-  doctest TerminalUi
+  doctest TerminalUI
 end
