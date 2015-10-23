@@ -6,7 +6,12 @@ defmodule TerminalUI.Supervisor do
   end
 
   def stop do
-    Process.exit(TerminalUI.Supervisor, :shutdown)
+    case Process.whereis(TerminalUI.Supervisor) do
+      pid when is_pid(pid) ->
+        Process.exit(TerminalUI.Supervisor, :shutdown)
+      _ ->
+        :ok
+    end
   end
 
   def init(:ok) do
