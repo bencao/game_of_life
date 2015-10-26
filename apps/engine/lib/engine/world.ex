@@ -1,7 +1,7 @@
 defmodule Engine.World do
   @moduledoc """
   A world is a 2D space composite by either alive of dead cells.
-  We will treat the matrix direction as it is typical described on Math books: X axis on the bottom and Y axis on the left.
+  We will treat the cells direction as it is typical described on Math books: X axis on the bottom and Y axis on the left.
 
   Y axis
    ^
@@ -21,16 +21,18 @@ defmodule Engine.World do
       iex> {:ok, world} = Engine.World.new
       iex> Engine.World.size(world)
       0
+      iex> Engine.World.cells(world)
+      []
       iex> Engine.World.cell_at({0, 0}, world)
       nil
 
   """
   def new do
-    {:ok, [ size: 0, canvas: nil ]}
+    {:ok, [ size: 0, cells: [], canvas: nil ]}
   end
 
   @doc """
-  Initialize a world with `size` and `matrix`
+  Initialize a world with `size` and `cells`
 
       iex> {:ok, world} = Engine.World.new([
       ...>   0, 1, 0,
@@ -39,18 +41,20 @@ defmodule Engine.World do
       ...> ])
       iex> Engine.World.size(world)
       3
+      iex> Engine.World.cells(world)
+      [0, 1, 0, 1, 0, 1, 0, 0, 1]
       iex> Engine.World.cell_at({2, 0}, world)
       1
 
   """
-  def new(matrix) do
-    size = matrix |> length |> :math.sqrt |> trunc
+  def new(cells) do
+    size = cells |> length |> :math.sqrt |> trunc
 
-    if length(matrix) == size * size do
-      canvas = :array.from_list(matrix, @status_dead)
-      {:ok, [ size: size, canvas: canvas ]}
+    if length(cells) == size * size do
+      canvas = :array.from_list(cells, @status_dead)
+      {:ok, [ size: size, cells: cells, canvas: canvas ]}
     else
-      {:error, :not_a_square_matrix}
+      {:error, :not_a_square}
     end
   end
 
@@ -178,6 +182,13 @@ defmodule Engine.World do
   end
 
   @doc """
+  Get a list of all cells
+  """
+  def cells(world) do
+    world[:cells]
+  end
+
+  @doc """
   Get a list of all cells in the world in a manner of a 3 dimmension tuple {x, y, cell},
   following the order from top left, flow to bottom right, right first then down.
 
@@ -186,14 +197,14 @@ defmodule Engine.World do
       ...>   1, 0, 1,
       ...>   0, 0, 1
       ...> ])
-      iex> Engine.World.cells(world)
+      iex> Engine.World.cells_with_x_y(world)
       [
         {0, 2, 0}, {1, 2, 1}, {2, 2, 0},
         {0, 1, 1}, {1, 1, 0}, {2, 1, 1},
         {0, 0, 0}, {1, 0, 0}, {2, 0, 1}
       ]
   """
-  def cells(world) do
+  def cells_with_x_y(world) do
     boundary = size(world) - 1
 
     unless boundary < 0 do

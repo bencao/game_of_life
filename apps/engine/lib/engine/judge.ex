@@ -76,8 +76,6 @@ defmodule Engine.Judge do
   end
 
   def handle_call({:inspect}, _from, state = %{:world => world}) do
-    cells = Engine.World.cells(world) |> Enum.map(fn {_, _, cell} -> cell end)
-
-    {:reply, {:ok, Engine.World.size(world), cells}, state}
+    {:reply, {:ok, Engine.World.size(world), Engine.World.cells(world)}, state}
   end
 end

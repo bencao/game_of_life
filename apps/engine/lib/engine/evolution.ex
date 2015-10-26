@@ -5,7 +5,7 @@ defmodule Engine.Evolution do
   def produce(world, callback) do
     {:ok, new_world} =
       world
-        |> Engine.World.cells
+        |> Engine.World.cells_with_x_y
         |> Enum.map(&(with_ajacents &1, world))
         |> Enum.map(&(new_state &1))
         |> Engine.World.new
