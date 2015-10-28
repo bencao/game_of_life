@@ -17,4 +17,26 @@ defmodule Engine.API do
   def inspect do
     Engine.Judge.inspect Application.get_env(:engine, :judge_pid)
   end
+
+  @doc """
+  Add listener with `name`, each time world changes the `callback` will be called
+  """
+  def add_listener(name, callback) when is_atom(name) do
+    GenEvent.call(
+      Application.get_env(:engine, :event_manager_pid),
+      Engine.MutationHandler,
+      {:add_listener, name, callback}
+    )
+  end
+
+  @doc """
+  Remove listener with `name`
+  """
+  def remove_listener(name) when is_atom(name) do
+    GenEvent.call(
+      Application.get_env(:engine, :event_manager_pid),
+      Engine.MutationHandler,
+      {:remove_listener, name}
+    )
+  end
 end

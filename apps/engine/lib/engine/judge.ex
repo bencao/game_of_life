@@ -29,7 +29,9 @@ defmodule Engine.Judge do
   Goto `new_world`
   """
   def goto(server, new_world, force \\ true) do
-    GenServer.call(server, {:goto, new_world, force})
+    :ok = GenServer.call(server, {:goto, new_world, force})
+
+    GenServer.call(server, {:notify_change})
   end
 
   @doc """
@@ -42,6 +44,8 @@ defmodule Engine.Judge do
   # server callback
 
   def init(state) do
+    GenEvent.add_mon_handler(state.event_manager_pid, Engine.MutationHandler, %{})
+
     {:ok, world} = Engine.World.new
     {:ok, Enum.into(%{:world => world, :flag => :idle}, state)}
   end
@@ -73,6 +77,12 @@ defmodule Engine.Judge do
       _ ->
         {:reply, :error, state}
     end
+  end
+
+  def handle_call({:notify_change}, _from, state = %{:event_manager_pid => event_manager_pid, :world => world}) do
+    GenEvent.notify(event_manager_pid, {:changed, Engine.World.size(world), Engine.World.cells(world)})
+
+    {:reply, :ok, state}
   end
 
   def handle_call({:inspect}, _from, state = %{:world => world}) do

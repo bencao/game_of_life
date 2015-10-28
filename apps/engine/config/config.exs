@@ -3,6 +3,7 @@
 use Mix.Config
 
 config :engine,
+  event_manager_pid:      Engine.EventManager,
   evolution_sup_pid:      Engine.EvolutionSupervisor,
   judge_pid:              Engine.Judge,
   judge_max_ignore_ticks: 3,

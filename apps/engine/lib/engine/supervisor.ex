@@ -8,6 +8,7 @@ defmodule Engine.Supervisor do
   def init(:ok) do
     children = [
       evolution,
+      event,
       judge,
       ticker
     ]
@@ -20,9 +21,10 @@ defmodule Engine.Supervisor do
   defp judge do
     worker(Engine.Judge, [
       %{
-        :pid               => Application.get_env(:engine, :judge_pid),
-        :max_ignore_ticks  => Application.get_env(:engine, :judge_max_ignore_ticks),
-        :evolution_sup_pid => Application.get_env(:engine, :evolution_sup_pid)
+        pid:               Application.get_env(:engine, :judge_pid),
+        max_ignore_ticks:  Application.get_env(:engine, :judge_max_ignore_ticks),
+        evolution_sup_pid: Application.get_env(:engine, :evolution_sup_pid),
+        event_manager_pid: Application.get_env(:engine, :event_manager_pid)
       }
     ])
   end
@@ -41,6 +43,12 @@ defmodule Engine.Supervisor do
   def evolution do
     supervisor(Task.Supervisor, [
       [name: Application.get_env(:engine, :evolution_sup_pid)]
+    ])
+  end
+
+  def event do
+    worker(GenEvent, [
+      [name: Application.get_env(:engine, :event_manager_pid)]
     ])
   end
 end
