@@ -15,10 +15,7 @@ defmodule TerminalUI.Supervisor do
   end
 
   def init(:ok) do
-    children = [
-      screen,
-      ticker
-    ]
+    children = [ screen ]
 
     opts = [strategy: :one_for_one, name: TerminalUI.Supervisor]
 
@@ -28,19 +25,6 @@ defmodule TerminalUI.Supervisor do
   defp screen do
     worker(TerminalUI.Screen, [
       %{:pid => Application.get_env(:terminal_ui, :screen_pid)}
-    ])
-  end
-
-  defp ticker do
-    worker(Task, [
-      TerminalUI.Ticker,
-      :tick,
-      [
-        %{
-          :screen_pid => Application.get_env(:terminal_ui, :screen_pid),
-          :fps        => Application.get_env(:terminal_ui, :fps)
-        }
-      ]
     ])
   end
 end
