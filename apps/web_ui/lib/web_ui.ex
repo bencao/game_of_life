@@ -13,6 +13,7 @@ defmodule WebUI do
       worker(WebUI.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(WebUI.Worker, [arg1, arg2, arg3]),
+      worker(WebUI.Sync, [[pid: WebUI.Sync]])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
