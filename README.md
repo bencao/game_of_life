@@ -27,5 +27,7 @@ I had chosen elixir to write this game mainly for purpose of learning this new l
 
 - Install [Elixir](http://elixir-lang.org/install.html)
 - `mix deps.get`
-- `elixir --sname main -S mix phoenix.server`
+- `iex --sname main -S mix phoenix.server`
+- execute `Patterns.Oscillators.Pulsar.load` in iex console
 - open [Demo](http://localhost:4000) page to see the result
+- execute `Patterns.Gun.GospherGliderGun.load` in iex console to see a different game
