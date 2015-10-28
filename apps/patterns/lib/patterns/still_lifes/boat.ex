@@ -1,5 +1,5 @@
 defmodule Patterns.StillLifes.Boat do
-  use Patterns
+  use Patterns.Loadable
 
   def to_list do
     [

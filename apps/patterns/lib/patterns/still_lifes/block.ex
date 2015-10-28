@@ -1,5 +1,5 @@
 defmodule Patterns.StillLifes.Block do
-  use Patterns
+  use Patterns.Loadable
 
   def to_list do
     [

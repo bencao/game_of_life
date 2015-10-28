@@ -1,5 +1,5 @@
 defmodule Patterns.Spaceships.LWSS do
-  use Patterns
+  use Patterns.Loadable
 
   def to_list do
     [
