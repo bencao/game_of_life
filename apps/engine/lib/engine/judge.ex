@@ -1,4 +1,6 @@
 defmodule Engine.Judge do
+  alias Engine.World, as: World
+
   @moduledoc """
   Hold the single source of truth of how this game is going
 
@@ -46,7 +48,7 @@ defmodule Engine.Judge do
   def init(state) do
     GenEvent.add_mon_handler(state.event_manager_pid, Engine.MutationHandler, %{})
 
-    {:ok, world} = Engine.World.new
+    {:ok, world} = World.new
     {:ok, Enum.into(%{:world => world, :flag => :idle}, state)}
   end
 
@@ -80,12 +82,12 @@ defmodule Engine.Judge do
   end
 
   def handle_call({:notify_change}, _from, state = %{:event_manager_pid => event_manager_pid, :world => world}) do
-    GenEvent.notify(event_manager_pid, {:changed, Engine.World.size(world), Engine.World.cells(world)})
+    GenEvent.notify(event_manager_pid, {:changed, World.size(world), World.cells(world)})
 
     {:reply, :ok, state}
   end
 
   def handle_call({:inspect}, _from, state = %{:world => world}) do
-    {:reply, {:ok, Engine.World.size(world), Engine.World.cells(world)}, state}
+    {:reply, {:ok, World.size(world), World.cells(world)}, state}
   end
 end

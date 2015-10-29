@@ -4,6 +4,7 @@ defmodule Engine.API do
   """
   def load(matrix) do
     {:ok, new_world} = Engine.World.new(matrix)
+
     Engine.Judge.goto(
       Application.get_env(:engine, :judge_pid),
       new_world,

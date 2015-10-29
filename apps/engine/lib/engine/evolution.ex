@@ -1,14 +1,16 @@
 defmodule Engine.Evolution do
+  alias Engine.World, as: World
+
   @doc """
   Produce a new world, start from `world`, and call `callback` with the new world as the first parameter
   """
   def produce(world, callback) do
     {:ok, new_world} =
       world
-        |> Engine.World.cells_with_x_y
+        |> World.cells_with_x_y
         |> Enum.map(&(with_ajacents &1, world))
         |> Enum.map(&(new_state &1))
-        |> Engine.World.new
+        |> World.new
 
     callback.(new_world)
   end
@@ -24,7 +26,7 @@ defmodule Engine.Evolution do
   """
   def new_state({cell, adjacents}) do
     adjacents
-      |> Enum.filter(&(Engine.World.alive_cell? &1))
+      |> Enum.filter(&(World.alive_cell? &1))
       |> Enum.count
       |> rule(cell)
   end
@@ -85,6 +87,6 @@ defmodule Engine.Evolution do
   def rule(_, _), do: 0
 
   defp with_ajacents({x, y, cell}, world) do
-    {cell, Engine.World.adjacent_cells_at({x, y}, world)}
+    {cell, World.adjacent_cells_at({x, y}, world)}
   end
 end
