@@ -24,6 +24,6 @@ EXPOSE 4000
 
 ADD . /usr/src/app
 
-RUN mix local.hex --force && mix deps.get
+RUN mix local.hex --force && mix local.rebar --force && mix deps.get
 
 CMD mix phoenix.server
