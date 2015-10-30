@@ -21,21 +21,13 @@ const resetCanvas = function(ctx, size) {
 }
 
 const paintCell = function(ctx, x, y, isAlive) {
-  ctx.fillStyle = (isAlive ? "black" : "white")
+  ctx.fillStyle = (isAlive ? "green" : "transparent")
   ctx.fillRect(
     10 + (x - 1) * canvasUnitSize,
     10 + (y - 1) * canvasUnitSize,
     canvasUnitSize,
     canvasUnitSize
   )
-}
-
-const print = function(size, cells) {
-  let table = []
-  for (let i = 0; i < size; i ++) {
-    table.push(cells.slice(i * size, (i + 1) * size))
-  }
-  console.table(table)
 }
 
 const render = function(size, cells) {
@@ -49,8 +41,6 @@ const render = function(size, cells) {
     let y = Math.floor(index / size)
     paintCell(ctx, x, y, cell === 1)
   })
-
-  print(size, cells)
 }
 
 channel.on("render", payload => {

@@ -1,4 +1,2 @@
-<div class="row">
-  <canvas id="main" width="800" height="800"></canvas>
-</div>
+<canvas id="main" width="800" height="800"></canvas>
 

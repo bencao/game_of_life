@@ -7,7 +7,7 @@ config :engine,
   evolution_sup_pid:      Engine.EvolutionSupervisor,
   judge_pid:              Engine.Judge,
   judge_max_ignore_ticks: 3,
-  ticker_interval:        500
+  ticker_interval:        100
 
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
