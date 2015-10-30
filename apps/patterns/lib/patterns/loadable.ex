@@ -1,6 +1,8 @@
 defmodule Patterns.Loadable do
   @callback to_list() :: [number]
 
+  use Patterns.Collector
+
   defmacro __using__(_) do
     quote do
       @doc """

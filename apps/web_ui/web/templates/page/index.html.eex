@@ -2,7 +2,7 @@
 
 <select id="control">
   <option value="">Please select a pattern</option>
-  <option value="Patterns.Gun.GospherGliderGun">Patterns.Gun.GospherGliderGun</option>
-  <option value="Patterns.Spaceships.Glider">Patterns.Spaceships.Glider</option>
+  <%= Enum.map @patterns, fn pattern -> %>
+    <option value="<%= pattern %>"><%= pattern %></option>
+  <% end %>
 </select>
-
