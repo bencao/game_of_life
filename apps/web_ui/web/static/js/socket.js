@@ -22,7 +22,7 @@ const resetCanvas = function(ctx, size) {
 }
 
 const paintCell = function(ctx, x, y, isAlive) {
-  ctx.fillStyle = (isAlive ? "green" : "transparent")
+  ctx.fillStyle = (isAlive ? "white" : "transparent")
   ctx.fillRect(
     10 + (x - 1) * canvasUnitSize,
     10 + (y - 1) * canvasUnitSize,
