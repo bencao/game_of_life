@@ -1,2 +1,8 @@
 <canvas id="main" width="800" height="800"></canvas>
 
+<select id="control">
+  <option value="">Please select a pattern</option>
+  <option value="Patterns.Gun.GospherGliderGun">Patterns.Gun.GospherGliderGun</option>
+  <option value="Patterns.Spaceships.Glider">Patterns.Spaceships.Glider</option>
+</select>
+

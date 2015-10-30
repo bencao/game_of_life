@@ -38,7 +38,8 @@ defmodule WebUI.Mixfile do
      {:phoenix_html, "~> 2.1"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
-     {:engine, in_umbrella: true}
+     {:engine, in_umbrella: true},
+     {:patterns, in_umbrella: true}
    ]
   end
 

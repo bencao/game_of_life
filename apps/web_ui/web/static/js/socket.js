@@ -10,6 +10,7 @@ socket.connect()
 let channel = socket.channel("game:game_of_life", {})
 
 const canvasUnitSize = 8
+const canvasMaxSize  = 800
 
 const resetCanvas = function(ctx, size) {
   ctx.clearRect(
@@ -34,7 +35,7 @@ const render = function(size, cells) {
   let canvas = document.getElementById("main")
   let ctx    = canvas.getContext("2d")
 
-  resetCanvas(ctx, 800)
+  resetCanvas(ctx, canvasMaxSize)
 
   cells.forEach(function(cell, index) {
     let x = index % size
@@ -46,6 +47,12 @@ const render = function(size, cells) {
 channel.on("render", payload => {
   render(payload.size, payload.cells)
 })
+
+document.getElementById('control').onchange = function() {
+  if (this.value !== '') {
+    channel.push("load", {pattern: this.value})
+  }
+}
 
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })

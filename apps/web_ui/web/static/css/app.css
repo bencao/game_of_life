@@ -21,7 +21,7 @@ form.link, form.button {
 }
 
 body {
-  background: url(/images/earth.jpg) no-repeat left center fixed;
+  background: url(/images/earth.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -34,3 +34,9 @@ body {
   margin: auto;
 }
 
+#control {
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
