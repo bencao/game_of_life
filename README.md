@@ -1,8 +1,8 @@
-# GameOfLife
+# Game of Life
 
-An elixir implementation of Conway's game of life.
+An elixir implementation of [Conway's game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
-## Game Introduction
+## Introduction
 
 Game of life is a zero player game which has four rules:
 
@@ -27,13 +27,15 @@ I had chosen elixir to write this game mainly for purpose of learning this new l
 
 ## How to run this game
 
-### Docker
+### Using Docker
 
 - `docker run -d -p 4000:4000 benb88/game_of_life`
+- open [Demo](http://localhost:4000) page to view the game
 
 ### Manual
 
 - Install [Elixir](http://elixir-lang.org/install.html)
+- Install [Nodejs](https://nodejs.org/en/download/)
 - `mix deps.get`
 - `mix phoenix.server`
 - open [Demo](http://localhost:4000) page to view the game
