@@ -27,6 +27,10 @@ I had chosen elixir to write this game mainly for purpose of learning this new l
 
 ## How to run this game
 
+### Docker
+
+- `docker run -d -p 4000:4000 benb88/game_of_life`
+
 ### Manual
 
 - Install [Elixir](http://elixir-lang.org/install.html)
