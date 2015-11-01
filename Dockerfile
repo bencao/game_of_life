@@ -25,5 +25,6 @@ EXPOSE 4000
 ADD . /usr/src/app
 
 RUN mix local.hex --force && mix local.rebar --force && mix deps.get
+RUN cd apps/web_ui && npm install && node node_modules/brunch/bin/brunch build
 
 CMD mix phoenix.server
