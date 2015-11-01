@@ -8,7 +8,7 @@ RUN apt-get update && \
     dpkg -i erlang-solutions_1.0_all.deb && \
     curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
     apt-get update && \
-    apt-get install -y elixir nodejs && \
+    apt-get install -y elixir erlang-dev libncurses5-dev build-essential nodejs && \
     apt-get clean
 
 
